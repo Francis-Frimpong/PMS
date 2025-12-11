@@ -1,10 +1,9 @@
 <?php
-session_start();
+require_once 'app/Middleware/Auth.php';
 
-if (!isset($_SESSION['user_id'])) {
-    header('Location: index.php');
-    exit;
-}
+use App\Middleware\Auth;
+
+Auth::check(); 
 ?>
 <!DOCTYPE html>
 <html lang="en">
