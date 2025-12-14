@@ -5,21 +5,8 @@ use App\Middleware\Auth;
 
 Auth::check(); 
 ?>
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Reports - Payroll App</title>
-    <link rel="stylesheet" href="css/style.css" />
-  </head>
-  <body>
-     <div class="navbar">
-      <a href="dashboard.php">Dashboard</a>
-      <a href="employees.php">Employees</a>
-      <a href="payroll.php">Payroll</a>
-      <a href="reports.php">Reports</a>
-    </div>
+<?php require_once __DIR__ . '/app/partials/header.php'; ?>
+
 
     <div class="container main">
       <h1>Reports</h1>
@@ -57,5 +44,5 @@ Auth::check();
         </tbody>
       </table>
     </div>
-  </body>
-</html>
+<?php require_once __DIR__ . '/app/partials/footer.php'; ?>
+  

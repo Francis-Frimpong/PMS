@@ -1,4 +1,6 @@
-/* Reset some defaults */
+/* =========================
+   RESET & BASE STYLES
+========================= */
 * {
   margin: 0;
   padding: 0;
@@ -16,14 +18,18 @@ a {
   color: inherit;
 }
 
-/* Container */
+/* =========================
+   LAYOUT
+========================= */
 .container {
   width: 90%;
   max-width: 1200px;
   margin: 0 auto;
 }
 
-/* Buttons */
+/* =========================
+   BUTTONS
+========================= */
 button,
 .btn {
   padding: 10px 20px;
@@ -32,7 +38,7 @@ button,
   border: none;
   border-radius: 6px;
   cursor: pointer;
-  transition: 0.2s;
+  transition: background-color 0.2s ease;
 }
 
 button:hover,
@@ -40,7 +46,9 @@ button:hover,
   background-color: #3730a3;
 }
 
-/* Form styles */
+/* =========================
+   FORMS
+========================= */
 form {
   display: flex;
   flex-direction: column;
@@ -58,7 +66,9 @@ select {
   border: 1px solid #ccc;
 }
 
-/* Table */
+/* =========================
+   TABLES
+========================= */
 table {
   width: 100%;
   border-collapse: collapse;
@@ -80,7 +90,9 @@ th {
   color: white;
 }
 
-/* Navbar / Sidebar */
+/* =========================
+   NAVBAR & SIDEBAR
+========================= */
 .navbar,
 .sidebar {
   background-color: #4f46e5;
@@ -88,13 +100,45 @@ th {
   padding: 15px;
 }
 
+/* Navbar layout */
+.navbar {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+/* Navbar links */
 .navbar a,
 .sidebar a {
   color: white;
-  margin-right: 15px;
   display: inline-block;
 }
 
+/* Reset form styles ONLY inside navbar */
+.navbar form {
+  display: flex;
+  flex-direction: row;
+  background: none;
+  padding: 0;
+  box-shadow: none;
+  margin-left: auto;
+}
+
+/* Logout button */
+.logout-btn {
+  padding: 8px 16px;
+  background-color: #dc2626;
+  border-radius: 6px;
+  font-weight: 600;
+}
+
+.logout-btn:hover {
+  background-color: #b91c1c;
+}
+
+/* =========================
+   PAGINATION
+========================= */
 .pagination {
   display: flex;
   justify-content: center;
@@ -104,7 +148,7 @@ th {
 }
 
 .pagination button {
-  padding: 5px 12px;
+  padding: 6px 14px;
   border: none;
   background-color: #3498db;
   color: #fff;
@@ -117,7 +161,9 @@ th {
   cursor: not-allowed;
 }
 
-/* Responsive Layout */
+/* =========================
+   RESPONSIVE LAYOUT
+========================= */
 @media (min-width: 768px) {
   .flex-row {
     display: flex;
