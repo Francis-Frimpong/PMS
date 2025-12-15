@@ -12,8 +12,9 @@ Auth::check();
       <h1>Add / Edit Employee</h1>
       <form>
         <input type="text" placeholder="Full Name" required />
-        <input type="text" placeholder="Role" required />
-        <input type="text" placeholder="Department" required />
+        <input type="email" placeholder="Email" required />
+        <input type="text" placeholder="phone" required />
+        <input type="text" placeholder="role" required />
         <input type="number" placeholder="Salary" required />
         <select required>
           <option value="">Payment Type</option>

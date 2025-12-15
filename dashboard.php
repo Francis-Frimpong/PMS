@@ -39,7 +39,7 @@ Auth::check();
           "
         >
           <h3>Total Payroll</h3>
-          <p><?php echo '$' . $stats['total_salary']?></p>
+          <p> ₵<?php echo $stats['total_salary']?></p>
         </div>
       </div>
     </div>

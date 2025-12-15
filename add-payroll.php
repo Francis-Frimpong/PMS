@@ -10,7 +10,7 @@ Auth::check();
 
     <div class="container main" style="max-width: 500px; margin-top: 30px">
       <h1>Add Payroll Record</h1>
-  <form>
+  <form action="add-employee.php" method="POST">
     <select name="employee_id" required>
       <option value="">Select Employee</option>
       <option value="1">John Doe</option>
