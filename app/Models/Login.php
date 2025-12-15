@@ -10,7 +10,7 @@ class Login{
         $this->pdo = $pdo;
     }
 
-    function login($username){
+    public function login($username){
         $stmt = $this->pdo->prepare("SELECT * FROM users WHERE username = ?");
         $stmt->execute([$username]);
         $user = $stmt->fetch(PDO::FETCH_ASSOC);

@@ -1,8 +1,14 @@
 <?php
 require_once 'app/Middleware/Auth.php';
+require 'app/Database/Database.php';
+require_once 'app/Controllers/DashboardStatsController.php';
 
+use App\Controllers\EmployeeStats;
 use App\Middleware\Auth;
 
+ $dashboard = new EmployeeStats();
+
+ $stats = $dashboard->getStats();
 Auth::check(); 
 ?>
 
@@ -21,7 +27,7 @@ Auth::check();
           "
         >
           <h3>Total Employees</h3>
-          <p>25</p>
+          <p><?php echo $stats['total_employees'];?></p>
         </div>
         <div
           style="
@@ -33,7 +39,7 @@ Auth::check();
           "
         >
           <h3>Total Payroll</h3>
-          <p>$50,000</p>
+          <p><?php echo '$' . $stats['total_salary']?></p>
         </div>
       </div>
     </div>
