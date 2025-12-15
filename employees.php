@@ -10,7 +10,7 @@ Auth::check(); // this will redir
 
     <div class="container main">
       <h1>Employees</h1>
-      <button class="btn" onclick="location.href='add-employee.html'">
+      <button class="btn" onclick="location.href='add-employee.php'">
         Add New Employee
       </button>
 
