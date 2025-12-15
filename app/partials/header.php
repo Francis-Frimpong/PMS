@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -15,7 +16,7 @@
     <a href="reports.php">Reports</a>
   </div>
 
-  <form action="logout.php" method="post" class="logout-form">
+  <form action="logout.php" method="POST" class="logout-form">
     <button type="submit" class="logout-btn">Logout</button>
   </form>
 </div>
