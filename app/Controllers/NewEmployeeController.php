@@ -26,7 +26,7 @@ class AddEmployee{
             $date_hired = trim($_POST['date_hired']);
             $payment_type = trim($_POST['payment-type']);
 
-            if(empty($fullname) || empty($email) || empty($role) || empty($phone) || empty($salary) || empty($payment_type)){
+            if(empty($fullname) || empty($email) || empty($role) || empty($phone) || empty($date_hired) || empty($salary) || empty($payment_type)){
                 header('Location: add-employee.php');
                 exit;
             }
