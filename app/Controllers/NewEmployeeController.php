@@ -23,7 +23,7 @@ class AddEmployee{
             $role = trim($_POST['role']);
             $phone = trim($_POST['phone']);
             $salary = trim($_POST['salary']);
-            $date_hired = trim($_POST['salary']);
+            $date_hired = trim($_POST['date_hired']);
             $payment_type = trim($_POST['payment-type']);
 
             if(empty($fullname) || empty($email) || empty($role) || empty($phone) || empty($salary) || empty($payment_type)){
