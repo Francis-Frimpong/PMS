@@ -22,6 +22,15 @@ Auth::check();
         <input type="text" placeholder="phone" name="phone" required />
         <input type="text" placeholder="role" name="role" required />
         <input type="number"  step="0.01"  placeholder="Salary" name="salary" required />
+        <input
+          type="text"
+          name="date_hired"
+          placeholder="Date Hired"
+          onfocus="this.type='date'"
+          onblur="if(!this.value)this.type='text'"
+          required
+        >
+
         <select required name="payment-type">
           <option value="">Payment Type</option>
           <option value="monthly">Monthly</option>

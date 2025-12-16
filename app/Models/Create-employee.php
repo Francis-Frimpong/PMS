@@ -12,9 +12,9 @@ class Employee{
         $this->pdo = $pdo;
     }
 
-    public function createEmployee($fullname, $email, $phone, $role, $salary_payment_type, $salary){
-        $stmt = $this->pdo->prepare("INSERT INTO employees (fullname, email,phone, role, salary_payment_type, salary) VALUES(?, ?, ?, ?, ?, ?)");
-        $stmt->execute([$fullname, $email, $phone, $role, $salary_payment_type, $salary]);
+    public function createEmployee($fullname, $email, $phone, $role, $salary_payment_type, $date_hired, $salary){
+        $stmt = $this->pdo->prepare("INSERT INTO employees (fullname, email,phone, role, salary_payment_type, date_hired, salary) VALUES(?, ?, ?, ?, ?, ?, ?)");
+        $stmt->execute([$fullname, $email, $phone, $role, $salary_payment_type, $date_hired, $salary]);
         return $stmt;
     }
 

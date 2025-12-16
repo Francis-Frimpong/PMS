@@ -23,6 +23,7 @@ class AddEmployee{
             $role = trim($_POST['role']);
             $phone = trim($_POST['phone']);
             $salary = trim($_POST['salary']);
+            $date_hired = trim($_POST['salary']);
             $payment_type = trim($_POST['payment-type']);
 
             if(empty($fullname) || empty($email) || empty($role) || empty($phone) || empty($salary) || empty($payment_type)){
@@ -30,7 +31,7 @@ class AddEmployee{
                 exit;
             }
 
-            $this->addEmployee->createEmployee($fullname, $email, $phone, $role, $payment_type, $salary);
+            $this->addEmployee->createEmployee($fullname, $email, $phone, $role, $payment_type, $date_hired,$salary);
 
             header('Location: employees.php');
 
