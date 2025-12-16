@@ -18,12 +18,14 @@ class Employee{
         return $stmt;
     }
 
-    public function displayEmployee(){
+    public function displayEmployees(){
         $stmt = $this->pdo->prepare("SELECT fullname, role, salary FROM employees");
         $stmt->execute();
-        $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $list = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        return $stmt;
+        return [
+            "list" => $list
+        ];
 
     }
 }

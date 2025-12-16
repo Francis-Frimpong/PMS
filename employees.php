@@ -1,9 +1,18 @@
 <?php
 require_once 'app/Middleware/Auth.php';
+require_once 'app/Controllers/NewEmployeeController.php';
 
+use App\Controllers\AddEmployee;
 use App\Middleware\Auth;
+Auth::check(); 
 
-Auth::check(); // this will redir
+$employeeList = new AddEmployee();
+
+$data = $employeeList->showEmployeeList();
+
+$lists = $data['list'];
+
+
 ?>
 <?php require_once __DIR__ . '/app/partials/header.php'; ?>
 
@@ -24,36 +33,30 @@ Auth::check(); // this will redir
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>John Doe</td>
-            <td>Manager</td>
-            <td>$2000</td>
-            <td>
-              <button
-                class="btn"
-                style="background: #10b981"
-                onclick="location.href='add-employee.html'"
-              >
-                Edit
-              </button>
-              <button class="btn" style="background: #ef4444">Delete</button>
-            </td>
-          </tr>
-          <tr>
-            <td>Jane Smith</td>
-            <td>Developer</td>
-            <td>$1500</td>
-            <td>
-              <button
-                class="btn"
-                style="background: #10b981"
-                onclick="location.href='add-employee.html'"
-              >
-                Edit
-              </button>
-              <button class="btn" style="background: #ef4444">Delete</button>
-            </td>
-          </tr>
+        <?php if(empty($lists)) :?>
+            <tr>
+              <td colspan="4">No employee added</td>
+            </tr>
+        <?php else :?>
+          <?php foreach($lists as $list) :?>  
+              <tr>
+                <td><?php echo htmlspecialchars( $list['fullname'])?></td>
+                <td><?php echo htmlspecialchars( $list['role'])?></td>
+                <td>₵<?php echo htmlspecialchars($list['salary'])?></td>
+                <td>
+                  <button
+                    class="btn"
+                    style="background: #10b981"
+                    onclick="location.href='add-employee.html'"
+                  >
+                    Edit
+                  </button>
+                  <button class="btn" style="background: #ef4444">Delete</button>
+                </td>
+              </tr>
+          <?php endforeach?>
+          
+        <?php endif?>
         </tbody>
       </table>
 
