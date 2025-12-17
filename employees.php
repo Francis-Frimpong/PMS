@@ -55,6 +55,7 @@ $pageTitle = "Employees"
                   >
                     Edit
                   </button>
+                  <button class="btn" style="background: #ccb136ff">Details</button>
                   <button class="btn" style="background: #ef4444">Delete</button>
                 </td>
               </tr>
