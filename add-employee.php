@@ -10,6 +10,9 @@ $AddEmployee = new AddEmployee();
 $AddEmployee->newEmployee();
 
 Auth::check(); 
+
+$pageTitle = "Add Employee"
+
 ?>
 <?php require_once __DIR__ . '/app/partials/header.php'; ?>
 

@@ -12,6 +12,8 @@ $data = $employeeList->showEmployeeList();
 
 $lists = $data['list'];
 
+$pageTitle = "Employees"
+
 
 ?>
 <?php require_once __DIR__ . '/app/partials/header.php'; ?>

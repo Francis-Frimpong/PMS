@@ -10,7 +10,10 @@ use App\Middleware\Auth;
 
  $stats = $dashboard->getStats();
 Auth::check(); 
+
+$pageTitle = "Dashboard"
 ?>
+
 
 <?php require_once __DIR__ . '/app/partials/header.php'; ?>
 

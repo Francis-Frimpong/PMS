@@ -4,6 +4,9 @@ require_once 'app/Middleware/Auth.php';
 use App\Middleware\Auth;
 
 Auth::check(); 
+
+$pageTitle = "Reports"
+
 ?>
 <?php require_once __DIR__ . '/app/partials/header.php'; ?>
 
