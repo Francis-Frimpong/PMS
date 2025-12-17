@@ -11,6 +11,8 @@ $employeeList = new AddEmployee();
 $data = $employeeList->showEmployeeList();
 
 $lists = $data['list'];
+$page = $data['page'];
+$totalPages = $data['totalPages'];
 
 $pageTitle = "Employees"
 
@@ -62,11 +64,28 @@ $pageTitle = "Employees"
         </tbody>
       </table>
 
-      <div class="pagination">
-        <button class="prev" disabled>&laquo; Previous</button>
-        <span class="page-info">Page 1 of 5</span>
-        <button class="next">Next &raquo;</button>
+     <div class="pagination">
+
+        <!-- Previous -->
+        <?php if ($page > 1): ?>
+          <a class="prev" href="?page=<?= $page - 1 ?>">&laquo; Previous</a>
+        <?php else: ?>
+          <span class="prev disabled">&laquo; Previous</span>
+        <?php endif; ?>
+
+        <!-- Page info -->
+        <span class="page-info">
+          Page <?= $page ?> of <?= $totalPages ?>
+        </span>
+
+        <!-- Next -->
+        <?php if ($page < $totalPages): ?>
+          <a class="next" href="?page=<?= $page + 1 ?>">Next &raquo;</a>
+        <?php else: ?>
+          <span class="next disabled">Next &raquo;</span>
+        <?php endif; ?>
+
       </div>
-    </div>
+
 <?php require_once __DIR__ . '/app/partials/footer.php'; ?>
   
