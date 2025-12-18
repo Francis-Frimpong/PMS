@@ -51,7 +51,7 @@ $pageTitle = "Employees"
                   <button
                     class="btn"
                     style="background: #10b981"
-                    onclick="location.href='add-employee.html'"
+                    onclick="location.href='add-employee.php'"
                   >
                     Edit
                   </button>
