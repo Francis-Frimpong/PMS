@@ -11,14 +11,14 @@ $AddEmployee->newEmployee();
 
 Auth::check(); 
 
-$pageTitle = "Update Employee"
+$pageTitle = "Edit Employee"
 
 ?>
 <?php require_once __DIR__ . '/app/partials/header.php'; ?>
 
 
     <div class="container main" style="max-width: 500px; margin-top: 30px">
-      <h1>Add / Edit Employee</h1>
+      <h1>Edit Employee</h1>
       <form action="add-employee.php" method="POST" >
         <input type="text" placeholder="Full Name" name="fullname" required />
         <input type="email" placeholder="Email" name="email" required />
