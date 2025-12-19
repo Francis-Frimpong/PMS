@@ -50,9 +50,12 @@ $pageTitle = "Employees"
                 <td><?php echo htmlspecialchars( $list['role'])?></td>
                 <td>₵<?php echo htmlspecialchars($list['salary'])?></td>
                 <td>
-               <a href="updateEmployee.php?id=<?php echo $list['id']?>" class="btn">Edit</a>
+               <a href="updateEmployee.php?id=<?php echo $list['id']?>" class="btn" style="background: #05b96eff">Edit</a>
 
-                  <button class="btn" style="background: #ccb136ff">Details</button>
+                  <a href="employee-detail.php?id=<?= $list['id'] ?>" class="btn" style="background: #efde44ff">
+                    Details
+                  </a>
+
                   <button class="btn" style="background: #ef4444">Delete</button>
                 </td>
               </tr>
