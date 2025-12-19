@@ -14,6 +14,8 @@ $lists = $data['list'];
 $page = $data['page'];
 $totalPages = $data['totalPages'];
 
+
+
 $pageTitle = "Employees"
 
 
@@ -48,13 +50,8 @@ $pageTitle = "Employees"
                 <td><?php echo htmlspecialchars( $list['role'])?></td>
                 <td>₵<?php echo htmlspecialchars($list['salary'])?></td>
                 <td>
-                  <button
-                    class="btn"
-                    style="background: #10b981"
-                    onclick="location.href='updateEmployee.php'"
-                  >
-                    Edit
-                  </button>
+               <a href="updateEmployee.php?id=<?php echo $list['id']?>" class="btn">Edit</a>
+
                   <button class="btn" style="background: #ccb136ff">Details</button>
                   <button class="btn" style="background: #ef4444">Delete</button>
                 </td>

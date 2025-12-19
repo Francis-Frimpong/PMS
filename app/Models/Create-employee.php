@@ -11,6 +11,7 @@ class Employee{
     public $perPage;
     public $totalRows;
     public $totalPages;
+    public $id;
 
     public function __construct(PDO $pdo)
     {
@@ -37,7 +38,7 @@ class Employee{
         $offset = ($this->page - 1) * $this->perPage;
 
         // query for employee list
-        $stmt = $this->pdo->prepare("SELECT fullname, role, salary FROM employees ORDER BY id DESC LIMIT :offset, :perPage");
+        $stmt = $this->pdo->prepare("SELECT id,fullname, role, salary FROM employees ORDER BY id DESC LIMIT :offset, :perPage");
         $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
         $stmt->bindValue(':perPage', $this->perPage, PDO::PARAM_INT);
         $stmt->execute();
@@ -46,7 +47,8 @@ class Employee{
         return [
             "list" => $list,
             'page' => $this->page,
-            'totalPages' => $this->totalPages
+            'totalPages' => $this->totalPages,
+            
         ];
 
     }
