@@ -7,6 +7,7 @@ USE PDO;
 class Employee{
     private $pdo;
 
+    
     public $page;
     public $perPage;
     public $totalRows;
@@ -51,5 +52,10 @@ class Employee{
             
         ];
 
+    }
+
+    public function deleteEmployee($id){
+        $stmt = $this->pdo->prepare("DELETE FROM employees WHERE id = ?");
+        return $stmt->execute([$id]);
     }
 }

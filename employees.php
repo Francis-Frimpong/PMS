@@ -4,15 +4,24 @@ require_once 'app/Controllers/NewEmployeeController.php';
 
 use App\Controllers\AddEmployee;
 use App\Middleware\Auth;
-Auth::check(); 
+$adminId = Auth::check(); 
+
 
 $employeeList = new AddEmployee();
 
 $data = $employeeList->showEmployeeList();
 
+
+
+
 $lists = $data['list'];
 $page = $data['page'];
 $totalPages = $data['totalPages'];
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id'])) {
+    $employeeList->delete($_POST['id']);
+}
+
 
 
 
@@ -55,13 +64,9 @@ $pageTitle = "Employees"
                   <a href="employee-detail.php?id=<?= $list['id'] ?>" class="btn" style="background: #efde44ff">
                     Details
                   </a>
-
-                 <button 
-                  class="btn deleteBtn" 
-                
-                  style="background:#ef4444">
-                  Delete
-                </button>
+                    <button class="btn deleteBtn" style="background-color: #d3381dff;"  data-id="<?= $list['id'] ?>">
+                        Delete
+                    </button>
 
                 </td>
               </tr>
@@ -97,13 +102,11 @@ $pageTitle = "Employees"
       <!-- Delete Modal -->
     <div class="modal-overlay" id="modal">
       <div class="modal-box">
-        <h3>Delete Post?</h3>
+        <h3>Delete Employee?</h3>
           <p>Do you want to delete this employee?
-        
-
         <div class="modal-actions">
-          <form action="employees.php?id=<?php echo $id ?>" method="POST">
-            <input type="hidden" name="id" id="deleteId" value="POST_ID">
+          <form action="employees.php" method="POST">
+            <input type="hidden" name="id" id="deleteId">
             <button type="submit" class="btn delete-btn">Delete</button>
           </form>
 

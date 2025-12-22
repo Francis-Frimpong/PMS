@@ -1,7 +1,9 @@
 const deleteBtns = document.querySelectorAll(".deleteBtn");
 const modal = document.querySelector(".modal-overlay");
 const cancelBtn = document.querySelector(".cancel-btn");
-const deleteInput = document.querySelector("#deleteId");
+
+const deleteButtons = document.querySelectorAll(".deleteBtn");
+const deleteInput = document.getElementById("deleteId");
 
 deleteBtns.forEach((btn) => {
   btn.addEventListener("click", () => {
@@ -13,4 +15,13 @@ deleteBtns.forEach((btn) => {
 
 cancelBtn.addEventListener("click", () => {
   modal.style.display = "none";
+});
+
+deleteButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    const id = button.dataset.id;
+    deleteInput.value = id;
+
+    document.getElementById("modal").style.display = "block";
+  });
 });

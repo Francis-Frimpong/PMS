@@ -2,7 +2,7 @@
 namespace App\Controllers;
 
 require_once "app/Database/Database.php";
-require_once "app/Models/Create-employee.php";
+require_once "app/Models/Employee.php";
 
 use App\Models\Employee;
 use App\Database\Database;
@@ -40,6 +40,14 @@ class AddEmployee{
 
     public function showEmployeeList(){
         return $this->addEmployee->displayEmployees();
+    }
+
+    public function delete($id){
+        if ($id) {
+            $this->addEmployee->deleteEmployee($id);
+            header('Location: employees.php');
+            exit;
+        }
     }
 
     

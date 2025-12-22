@@ -21,8 +21,6 @@ $pageTitle = "Edit Employee";
   <h1>Edit Employee</h1>
 
   <form action="updateEmployee.php?id=<?= $id ?>" method="POST">
-    <input type="hidden" name="id" value="<?= $id ?>">
-
     <input type="text" name="fullname" value="<?= htmlspecialchars($user['fullname']) ?>" required>
     <input type="email" name="email" value="<?= htmlspecialchars($user['email']) ?>" required>
     <input type="text" name="phone" value="<?= htmlspecialchars($user['phone']) ?>" required>

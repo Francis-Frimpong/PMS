@@ -17,7 +17,7 @@ class LoginController{
         $user = $this->login->login($username);
 
         if(!$user){
-            echo "Invalid username or password";
+            header('Location:index.php');
             exit;
         }
 
