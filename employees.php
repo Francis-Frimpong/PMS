@@ -56,7 +56,13 @@ $pageTitle = "Employees"
                     Details
                   </a>
 
-                  <button class="btn" style="background: #ef4444">Delete</button>
+                 <button 
+                  class="btn deleteBtn" 
+                
+                  style="background:#ef4444">
+                  Delete
+                </button>
+
                 </td>
               </tr>
           <?php endforeach?>
@@ -87,6 +93,24 @@ $pageTitle = "Employees"
         <?php endif; ?>
 
       </div>
+
+      <!-- Delete Modal -->
+    <div class="modal-overlay" id="modal">
+      <div class="modal-box">
+        <h3>Delete Post?</h3>
+          <p>Do you want to delete this employee?
+        
+
+        <div class="modal-actions">
+          <form action="employees.php?id=<?php echo $id ?>" method="POST">
+            <input type="hidden" name="id" id="deleteId" value="POST_ID">
+            <button type="submit" class="btn delete-btn">Delete</button>
+          </form>
+
+          <button class="btn cancel-btn">Cancel</button>
+        </div>
+      </div>
+    </div>
 
 <?php require_once __DIR__ . '/app/partials/footer.php'; ?>
   
