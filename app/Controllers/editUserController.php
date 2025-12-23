@@ -3,8 +3,11 @@ namespace App\Controllers;
 
 require_once "app/Database/Database.php";
 require_once "app/Models/editUser.php";
+require_once "app/Core/Flash.php";
+
 
 use App\Models\EditUser;
+use App\Core\FlashMessage;
 use App\Database\Database;
 
 class EditUserData{
@@ -52,6 +55,7 @@ class EditUserData{
             $id
         );
 
+        FlashMessage::addMessage('info', 'Employee Info updated');
         header("Location: employees.php");
         exit;
     }

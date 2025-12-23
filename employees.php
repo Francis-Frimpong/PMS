@@ -13,7 +13,6 @@ $flashMessage = FlashMessage::getMessage();
 
 
 $employeeList = new AddEmployee();
-
 $data = $employeeList->showEmployeeList();
 
 
@@ -26,9 +25,6 @@ $totalPages = $data['totalPages'];
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id'])) {
     $employeeList->delete($_POST['id']);
 }
-
-
-
 
 $pageTitle = "Employees";
 

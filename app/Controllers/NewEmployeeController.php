@@ -51,6 +51,7 @@ class AddEmployee{
     public function delete($id){
         if ($id) {
             $this->addEmployee->deleteEmployee($id);
+            FlashMessage::addMessage('success', 'Employee info deleted');
             header('Location: employees.php');
             exit;
         }
