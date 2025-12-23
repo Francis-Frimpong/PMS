@@ -1,10 +1,14 @@
 <?php
 namespace App\Controllers;
 
+
 require_once "app/Database/Database.php";
 require_once "app/Models/Employee.php";
+require_once "app/Core/Flash.php";
 
 use App\Models\Employee;
+use App\Core\FlashMessage;
+
 use App\Database\Database;
 
 class AddEmployee{
@@ -33,7 +37,9 @@ class AddEmployee{
 
             $this->addEmployee->createEmployee($fullname, $email, $phone, $role, $payment_type, $date_hired,$salary);
 
+            FlashMessage::addMessage('success', 'New employee added');
             header('Location: employees.php');
+            exit;
 
         }
     }

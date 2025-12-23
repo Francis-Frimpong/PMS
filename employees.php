@@ -1,10 +1,15 @@
 <?php
 require_once 'app/Middleware/Auth.php';
 require_once 'app/Controllers/NewEmployeeController.php';
+require_once 'app/Core/Flash.php';
 
 use App\Controllers\AddEmployee;
 use App\Middleware\Auth;
+use App\Core\FlashMessage;
 $adminId = Auth::check(); 
+$flashMessage = FlashMessage::getMessage();
+
+
 
 
 $employeeList = new AddEmployee();
@@ -25,11 +30,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id'])) {
 
 
 
-$pageTitle = "Employees"
-
+$pageTitle = "Employees";
 
 ?>
 <?php require_once __DIR__ . '/app/partials/header.php'; ?>
+
+<?php if($flashMessage):?>
+   <div class="message-banner <?= $flashMessage['type'] ?>">
+    <?= htmlspecialchars($flashMessage['message']) ?>
+  </div>
+<?php endif;?>
 
 
     <div class="container main">
