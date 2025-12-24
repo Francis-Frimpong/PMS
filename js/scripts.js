@@ -25,3 +25,15 @@ deleteButtons.forEach((button) => {
     document.getElementById("modal").style.display = "block";
   });
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+  const messageBanner = document.querySelector(".message-banner");
+  const closeBtn = document.querySelector(".close");
+
+  if (messageBanner && closeBtn) {
+    closeBtn.addEventListener("click", () => {
+      messageBanner.style.display = "none";
+      console.log("close");
+    });
+  }
+});

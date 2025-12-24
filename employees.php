@@ -34,7 +34,10 @@ $pageTitle = "Employees";
 <?php if($flashMessage):?>
    <div class="message-banner <?= $flashMessage['type'] ?>">
     <?= htmlspecialchars($flashMessage['message']) ?>
+
+    <button class="close <?= $flashMessage['type'] ?>">X</button>
   </div>
+
 <?php endif;?>
 
 
