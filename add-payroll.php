@@ -1,9 +1,20 @@
 <?php
 require_once 'app/Middleware/Auth.php';
+require_once 'app/Controllers/NewEmployeeController.php';
+require_once 'app/Core/Flash.php';
+
+use App\Controllers\AddEmployee;
+use App\Core\FlashMessage;
 
 use App\Middleware\Auth;
 
 Auth::check(); 
+
+$employeeList = new AddEmployee();
+$data = $employeeList->showEmployeeList();
+$lists = $data['list'];
+// $page = $data['page'];
+// $totalPages = $data['totalPages'];
 
 $pageTitle = "Add Payroll Records"
 
@@ -16,8 +27,10 @@ $pageTitle = "Add Payroll Records"
   <form action="add-employee.php" method="POST">
     <select name="employee_id" required>
       <option value="">Select Employee</option>
-      <option value="1">John Doe</option>
-      <option value="2">Jane Smith</option>
+      <?php foreach($lists as $list): ?>
+        <option value="<?= $list['id'] ?>"><?=  htmlspecialchars($list['fullname']) ?></option>
+      <?php endforeach ?>
+     
     </select>
 
     <label>Pay Period</label>
