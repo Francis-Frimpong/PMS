@@ -1,9 +1,11 @@
 <?php
 require_once 'app/Middleware/Auth.php';
 require_once 'app/Controllers/NewEmployeeController.php';
+require_once 'app/Controllers/PayrollRecordController.php';
 require_once 'app/Core/Flash.php';
 
 use App\Controllers\AddEmployee;
+use App\Controllers\AddPayrollRecords;
 use App\Core\FlashMessage;
 
 use App\Middleware\Auth;
@@ -11,6 +13,10 @@ use App\Middleware\Auth;
 Auth::check(); 
 
 $employeeList = new AddEmployee();
+$addpayroll = new AddPayrollRecords;
+
+$addpayroll->newPayrollRecord();
+
 $data = $employeeList->showEmployeeList();
 $lists = $data['list'];
 // $page = $data['page'];
@@ -24,7 +30,7 @@ $pageTitle = "Add Payroll Records"
 
     <div class="container main" style="max-width: 500px; margin-top: 30px">
       <h1>Add Payroll Record</h1>
-  <form action="add-employee.php" method="POST">
+  <form action="add-payroll.php" method="POST">
     <select name="employee_id" required>
       <option value="">Select Employee</option>
       <?php foreach($lists as $list): ?>
@@ -37,16 +43,16 @@ $pageTitle = "Add Payroll Records"
     <input type="text" name="pay_period" placeholder="e.g. January 20.." required />
     
     <label>Gross Salary</label>
-    <input type="number" name="gross_salary" placeholder="Gross Salary" required />
+    <input type="number" step="0.01" name="gross_salary" placeholder="Gross Salary" required />
 
     <label>Tax</label>
-    <input type="number" name="tax" placeholder="Tax" required />
+    <input type="number" step="0.01" name="tax" placeholder="Tax" required />
 
     <label>Deductions</label>
-    <input type="number" name="deductions" placeholder="Deductions" required />
+    <input type="number" step="0.01" name="deductions" placeholder="Deductions" required />
 
     <label>Net Salary</label>
-    <input type="number" name="net_salary" placeholder="Net Salary" required />
+    <input type="number" step="0.01" name="net_salary" placeholder="Net Salary" required />
 
     <label>Payment Date</label>
     <input type="date" name="payment_date" required />
