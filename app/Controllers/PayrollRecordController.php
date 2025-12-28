@@ -40,4 +40,8 @@ class AddPayrollRecords{
             exit;
         }
     }
+
+    public function showPayrollList(){
+        return $this->addPayroll->showPayroll();
+    }
 }

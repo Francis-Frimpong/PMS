@@ -22,6 +22,7 @@ $lists = $data['list'];
 $page = $data['page'];
 $totalPages = $data['totalPages'];
 
+// delete
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id'])) {
     $employeeList->delete($_POST['id']);
 }
