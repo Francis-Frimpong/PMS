@@ -38,7 +38,7 @@ if (!$employee) {
         <div class="detail-grid">
           <div class="detail-item">
             <span>Full Name</span>
-            <strong><?=  htmlspecialchars($employee['fullname']) ?></strong>
+            <strong><?=  htmlspecialchars($employee['full_name']) ?></strong>
           </div>
     
           <div class="detail-item">
@@ -58,7 +58,7 @@ if (!$employee) {
     
           <div class="detail-item">
             <span>Payment Type</span>
-            <strong><?=  htmlspecialchars($employee['salary_payment_type']) ?></strong>
+            <strong><?=  htmlspecialchars($employee['payment_type']) ?></strong>
           </div>
     
           <div class="detail-item">

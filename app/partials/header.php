@@ -1,3 +1,14 @@
+<?php  
+$navLinks = [
+  "Dashboard" =>'dashboard.php', 
+  "Employees" => "employees.php", 
+  "Payroll" => "payroll.php", 
+  "Reports" => "reports.php"
+];
+
+  $currentPage = basename($_SERVER['PHP_SELF']);
+
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -10,10 +21,10 @@
   <body>
 <div class="navbar">
   <div class="nav-links">
-    <a href="dashboard.php">Dashboard</a>
-    <a href="employees.php">Employees</a>
-    <a href="payroll.php">Payroll</a>
-    <a href="reports.php">Reports</a>
+    <?php foreach($navLinks as $navlink => $url) :?>
+      <a href="<?= htmlspecialchars($url)?>" class="<?=  $currentPage === $url? 'active-page': ''?>"><?= htmlspecialchars($navlink) ?></a>
+    <?php endforeach?>
+   
   </div>
 
   <form action="logout.php" method="POST" class="logout-form">

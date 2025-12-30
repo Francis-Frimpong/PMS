@@ -21,7 +21,7 @@ $pageTitle = "Edit Employee";
   <h1>Edit Employee</h1>
 
   <form action="updateEmployee.php?id=<?= $id ?>" method="POST">
-    <input type="text" name="fullname" value="<?= htmlspecialchars($user['fullname']) ?>" required>
+    <input type="text" name="fullname" value="<?= htmlspecialchars($user['full_name']) ?>" required>
     <input type="email" name="email" value="<?= htmlspecialchars($user['email']) ?>" required>
     <input type="text" name="phone" value="<?= htmlspecialchars($user['phone']) ?>" required>
     <input type="text" name="role" value="<?= htmlspecialchars($user['role']) ?>" required>
@@ -35,8 +35,8 @@ $pageTitle = "Edit Employee";
     >
 
     <select name="payment_type" required>
-      <option value="monthly" <?= $user['salary_payment_type'] === 'monthly' ? 'selected' : '' ?>>Monthly</option>
-      <option value="hourly" <?= $user['salary_payment_type'] === 'hourly' ? 'selected' : '' ?>>Hourly</option>
+      <option value="monthly" <?= $user['payment_type'] === 'monthly' ? 'selected' : '' ?>>Monthly</option>
+      <option value="hourly" <?= $user['payment_type'] === 'hourly' ? 'selected' : '' ?>>Hourly</option>
     </select>
 
     <button type="submit">Save</button>

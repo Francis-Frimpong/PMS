@@ -30,7 +30,7 @@ class LoginController{
 
         }
 
-         echo "Invalid username or password";
+         header('Location:index.php');
          exit;
     }
 }

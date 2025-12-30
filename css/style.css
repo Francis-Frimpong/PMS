@@ -312,6 +312,11 @@ th {
   background-color: #6b7280;
 }
 
+.nav-links > .active-page {
+  color: red;
+  font-weight: bold;
+}
+
 .message-banner {
   padding: 12px 16px;
   margin-top: 16px;

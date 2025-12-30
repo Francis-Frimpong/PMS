@@ -20,7 +20,7 @@ class EditUser{
     }
 
     public function updateUserInfo($fullname, $email, $phone, $role, $payment_type, $date_hired,$salary, $id){
-        $stmt = $this->pdo->prepare("UPDATE employees SET fullname = ?, email = ?, phone = ?,role = ?, salary_payment_type = ?,  date_hired = ?, salary = ? WHERE id = ?");
+        $stmt = $this->pdo->prepare("UPDATE employees SET full_name = ?, email = ?, phone = ?,role = ?, salary_payment_type = ?,  date_hired = ?, salary = ? WHERE id = ?");
         $stmt->execute([ $fullname, $email, $phone, $role, $payment_type, $date_hired,$salary, $id]);
 
         return $stmt;

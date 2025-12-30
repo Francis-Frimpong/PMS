@@ -20,7 +20,7 @@ class Employee{
     }
 
     public function createEmployee($fullname, $email, $phone, $role, $salary_payment_type, $date_hired, $salary){
-        $stmt = $this->pdo->prepare("INSERT INTO employees (fullname, email,phone, role, salary_payment_type, date_hired, salary) VALUES(?, ?, ?, ?, ?, ?, ?)");
+        $stmt = $this->pdo->prepare("INSERT INTO employees (full_name, email,phone, role, payment_type, date_hired, salary) VALUES(?, ?, ?, ?, ?, ?, ?)");
         $stmt->execute([$fullname, $email, $phone, $role, $salary_payment_type, $date_hired, $salary]);
         return $stmt;
     }
@@ -39,7 +39,7 @@ class Employee{
         $offset = ($this->page - 1) * $this->perPage;
 
         // query for employee list
-        $stmt = $this->pdo->prepare("SELECT id,fullname, role, salary FROM employees ORDER BY id DESC LIMIT :offset, :perPage");
+        $stmt = $this->pdo->prepare("SELECT id,full_name, role, salary FROM employees ORDER BY id DESC LIMIT :offset, :perPage");
         $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
         $stmt->bindValue(':perPage', $this->perPage, PDO::PARAM_INT);
         $stmt->execute();

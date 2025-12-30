@@ -65,7 +65,7 @@ $pageTitle = "Employees";
         <?php else :?>
           <?php foreach($lists as $list) :?>  
               <tr>
-                <td><?php echo htmlspecialchars( $list['fullname'])?></td>
+                <td><?php echo htmlspecialchars( $list['full_name'])?></td>
                 <td><?php echo htmlspecialchars( $list['role'])?></td>
                 <td>₵<?php echo htmlspecialchars($list['salary'])?></td>
                 <td>

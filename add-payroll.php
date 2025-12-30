@@ -34,7 +34,7 @@ $pageTitle = "Add Payroll Records"
     <select name="employee_id" required>
       <option value="">Select Employee</option>
       <?php foreach($lists as $list): ?>
-        <option value="<?= $list['id'] ?>"><?=  htmlspecialchars($list['fullname']) ?></option>
+        <option value="<?= $list['id'] ?>"><?=  htmlspecialchars($list['full_name']) ?></option>
       <?php endforeach ?>
      
     </select>

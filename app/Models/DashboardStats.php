@@ -11,7 +11,7 @@ class Statistics{
     }
 
     public function dashboardStats() :array{
-      $stmt = $this->pdo->prepare("SELECT COUNT(fullname) AS total_employees, COALESCE(SUM(salary), 0) AS total_salary FROM employees");
+      $stmt = $this->pdo->prepare("SELECT COUNT(full_name) AS total_employees, COALESCE(SUM(salary), 0) AS total_salary FROM employees");
       $stmt->execute();
 
       $dashboardStats = $stmt->fetch(PDO::FETCH_ASSOC);

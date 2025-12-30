@@ -18,7 +18,7 @@ class Payroll{
     }
 
     public function addPayroll($employee_id, $pay_period, $gross_salary, $tax, $deductions, $net_salary, $payment_date){
-        $stmt = $this->pdo->prepare("INSERT INTO payroll( employee_id, pay_period, gross_salary, tax, deductions, net_salary, payment_date) VALUES (?,?,?,?,?,?,?)");
+        $stmt = $this->pdo->prepare("INSERT INTO payrolls( employee_id, pay_period, gross_salary, tax, deductions, net_salary, payment_date) VALUES (?,?,?,?,?,?,?)");
 
         $stmt->execute([$employee_id, $pay_period, $gross_salary, $tax, $deductions, $net_salary, $payment_date]);
 
@@ -28,7 +28,7 @@ class Payroll{
     public function showPayroll(){
          // pagination query
         $this->perPage = 5;
-        $stmt = $this->pdo->query("SELECT COUNT(*) AS cnt FROM payroll");
+        $stmt = $this->pdo->query("SELECT COUNT(*) AS cnt FROM payrolls");
         $this->totalRows = (int)$stmt->fetchColumn();
         $this->totalPages = ($this->totalRows > 0) ? (int) ceil($this->totalRows / $this->perPage) : 1;
 
@@ -41,13 +41,13 @@ class Payroll{
         // query for employee list
 
             $stmt = $this->pdo->prepare("SELECT 
-            payroll.id AS payroll_id,
-            payroll.payment_date,
-            payroll.net_salary,
-            employees.fullname AS employee_name
-            FROM payroll
-            JOIN employees ON payroll.employee_id = employees.id
-            ORDER BY payroll.id DESC
+            payrolls.id AS payroll_id,
+            payrolls.payment_date,
+            payrolls.net_salary,
+            employees.full_name AS employee_name
+            FROM payrolls
+            JOIN employees ON payrolls.employee_id = employees.id
+            ORDER BY payrolls.id DESC
             LIMIT :offset, :perPage
         ");
         $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
