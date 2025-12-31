@@ -7,6 +7,10 @@
   box-sizing: border-box;
 }
 
+.navbar a.active-page {
+  color: rgb(161, 176, 197) !important;
+  font-weight: bold;
+}
 body {
   font-family: Arial, sans-serif;
   background-color: #f4f6f8;
@@ -310,11 +314,6 @@ th {
 
 .cancel-btn:hover {
   background-color: #6b7280;
-}
-
-.nav-links > .active-page {
-  color: red;
-  font-weight: bold;
 }
 
 .message-banner {

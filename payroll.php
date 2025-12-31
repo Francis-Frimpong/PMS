@@ -24,7 +24,7 @@ $pageTitle = "Payroll"
     <div class="container main">
       <h1>Payroll</h1>
       <button class="btn" onclick="location.href='add-payroll.php'">
-        Add Payroll Record
+        Edit Payroll Record
       </button>
 
       <table>
@@ -48,7 +48,8 @@ $pageTitle = "Payroll"
                 <td>₵<?php echo htmlspecialchars($payroll['net_salary'])?></td>
                 <td><?php echo htmlspecialchars($payroll['payment_date'])?></td>
                 <td>
-                  <button class="btn" style="background: #10b981">Edit</button>
+                  <a href="editPayroll.php" class="btn" style="background: #10b981">Edit</a>
+                  
                   <button class="btn" style="background: #ef4444">Delete</button>
                 </td>
               </tr>
