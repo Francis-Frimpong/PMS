@@ -1,21 +1,27 @@
 <?php
 require_once 'app/Middleware/Auth.php';
 require_once 'app/Controllers/PayrollRecordController.php';
+require_once 'app/Core/Flash.php';
+
 
 use App\Middleware\Auth;
 use App\Controllers\AddPayrollRecords;
+use App\Core\FlashMessage;
+
 
 Auth::check(); 
 
 $displayPayroll = new AddPayrollRecords();
 
-$payrollData = $displayPayroll->showPayrollList();
 
+$payrollData = $displayPayroll->showPayrollList();
 $payrollLists = $payrollData['list'];
+
+
 $page = $payrollData['page'];
 $totalPages = $payrollData['totalPages'];
 
-$pageTitle = "Payroll"
+$pageTitle = "Payroll";
 
 ?>
 <?php require_once __DIR__ . '/app/partials/header.php'; ?>
@@ -24,7 +30,7 @@ $pageTitle = "Payroll"
     <div class="container main">
       <h1>Payroll</h1>
       <button class="btn" onclick="location.href='add-payroll.php'">
-        Edit Payroll Record
+        Add Payroll Record
       </button>
 
       <table>
@@ -43,18 +49,20 @@ $pageTitle = "Payroll"
            </tr>
           <?php else :?> 
             <?php foreach($payrollLists as $payroll) :?>
+              
               <tr>
                 <td><?php echo htmlspecialchars($payroll['employee_name'])?></td>
                 <td>₵<?php echo htmlspecialchars($payroll['net_salary'])?></td>
                 <td><?php echo htmlspecialchars($payroll['payment_date'])?></td>
                 <td>
-                  <a href="editPayroll.php" class="btn" style="background: #10b981">Edit</a>
+                  <a href="editPayroll.php?id=<?= $payroll['payroll_id'] ?>" class="btn" style="background: #10b981">Edit</a>
                   
                   <button class="btn" style="background: #ef4444">Delete</button>
                 </td>
               </tr>
-            <?php endforeach?>
-          <?php endif?>
+              
+            <?php endforeach;?>
+          <?php endif;?>
           
         </tbody>
       </table>

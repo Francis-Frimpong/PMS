@@ -38,9 +38,9 @@ class Payroll{
 
         $offset = ($this->page - 1) * $this->perPage;
 
-        // query for employee list
+        // query for employee payroll list
 
-            $stmt = $this->pdo->prepare("SELECT 
+            $stmt = $this->pdo->prepare("SELECT
             payrolls.id AS payroll_id,
             payrolls.payment_date,
             payrolls.net_salary,
@@ -63,4 +63,6 @@ class Payroll{
         ];
 
     }
+
+    
 }

@@ -1,63 +1,68 @@
 <?php
 require_once 'app/Middleware/Auth.php';
-require_once 'app/Controllers/NewEmployeeController.php';
-require_once 'app/Controllers/PayrollRecordController.php';
-require_once 'app/Core/Flash.php';
+require_once 'app/Controllers/editpayrollController.php';
 
-use App\Controllers\AddEmployee;
+
 use App\Controllers\AddPayrollRecords;
-use App\Core\FlashMessage;
+use App\Controllers\UpdatePayrollData;
+
 
 use App\Middleware\Auth;
 
 Auth::check(); 
 
-$employeeList = new AddEmployee();
-$addpayroll = new AddPayrollRecords;
 
-$addpayroll->newPayrollRecord();
+$controller = new UpdatePayrollData();
+$data = $controller->UpdatePayrollRecords();
 
-$data = $employeeList->showEmployeeList();
-$lists = $data['list'];
-// $page = $data['page'];
-// $totalPages = $data['totalPages'];
+$payroll   = $data['payroll'];
+$employees = $data['employees']; 
+$id = $_GET['id'];
 
-$pageTitle = "Add Payroll Records"
+
+$pageTitle = "Edit Payroll Records"
 
 ?>
 <?php require_once __DIR__ . '/app/partials/header.php'; ?>
 
 
     <div class="container main" style="max-width: 500px; margin-top: 30px">
-      <h1>Add Payroll Record</h1>
-  <form action="add-payroll.php" method="POST">
-    <select name="employee_id" required>
+      <h1>Edit Payroll Record</h1>
+  <form action="editPayroll.php?id=<?= $id ?>" method="POST">
+   <select name="employee_id" required>
       <option value="">Select Employee</option>
-      <?php foreach($lists as $list): ?>
-        <option value="<?= $list['id'] ?>"><?=  htmlspecialchars($list['full_name']) ?></option>
-      <?php endforeach ?>
-     
+
+      <?php foreach ($employees as $employee): ?>
+        <option 
+          value="<?= $employee['id'] ?>"
+          <?= $employee['id'] == $payroll['employee_id'] ? 'selected' : '' ?>
+        >
+          <?= htmlspecialchars($employee['full_name']) ?>
+        </option>
+      <?php endforeach; ?>
     </select>
 
+
     <label>Pay Period</label>
-    <input type="text" name="pay_period" placeholder="e.g. January 20.." required />
+    <input type="text" name="pay_period" placeholder="e.g. January 20.." 
+    value="<?= htmlspecialchars($payroll['pay_period']) ?>" required />
     
     <label>Gross Salary</label>
-    <input type="number" step="0.01" name="gross_salary" placeholder="Gross Salary" required />
+    <input type="number" step="0.01" name="gross_salary" placeholder="Gross Salary" value="<?= htmlspecialchars($payroll['gross_salary']) ?>" required />
 
     <label>Tax</label>
-    <input type="number" step="0.01" name="tax" placeholder="Tax" required />
+    <input type="number" step="0.01" name="tax" placeholder="Tax" value="<?= htmlspecialchars($payroll['tax']) ?>" required />
 
     <label>Deductions</label>
-    <input type="number" step="0.01" name="deductions" placeholder="Deductions" required />
+    <input type="number" step="0.01" name="deductions" placeholder="Deductions" value="<?= htmlspecialchars($payroll['deductions']) ?>" required />
 
     <label>Net Salary</label>
-    <input type="number" step="0.01" name="net_salary" placeholder="Net Salary" required />
+    <input type="number" step="0.01" name="net_salary" placeholder="Net Salary" value="<?= htmlspecialchars($payroll['net_salary']) ?>" required />
 
     <label>Payment Date</label>
-    <input type="date" name="payment_date" required />
+    <input type="date" name="payment_date" value="<?= htmlspecialchars($payroll['payment_date']) ?>" required />
 
-    <button type="submit">Save</button>
+    <button type="submit">Save Update</button>
 </form>
 
     </div>
