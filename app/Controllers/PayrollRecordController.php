@@ -44,4 +44,14 @@ class AddPayrollRecords{
     public function showPayrollList(){
         return $this->addPayroll->showPayroll();
     }
+
+    public function deletepayroll($id){
+        if($id){
+            $this->addPayroll->deletePayrollData($id);
+            FlashMessage::addMessage('success', 'Payroll data deleted');
+            header('Location: payroll.php');
+            exit;
+
+        }
+    }
 }

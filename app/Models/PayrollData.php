@@ -64,5 +64,10 @@ class Payroll{
 
     }
 
+    public function deletePayrollData($id){
+        $stmt = $this->pdo->prepare("DELETE FROM payrolls WHERE id = ?");
+        return $stmt->execute([$id]);
+    }
+
     
 }
