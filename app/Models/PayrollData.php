@@ -63,6 +63,20 @@ class Payroll{
         ];
 
     }
+    public function getPayrollByEmployeeAndMonth($employee_id, $month)
+    {
+        $stmt = $this->pdo->prepare("
+            SELECT p.*, e.full_name
+            FROM payrolls p
+            JOIN employees e ON p.employee_id = e.id
+            WHERE p.employee_id = ?
+            AND p.pay_period = ?
+            LIMIT 1
+        ");
+        $stmt->execute([$employee_id, $month]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
 
     public function deletePayrollData($id){
         $stmt = $this->pdo->prepare("DELETE FROM payrolls WHERE id = ?");
