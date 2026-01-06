@@ -86,7 +86,6 @@ class AddPayrollRecords{
             'payslip_' . $payroll['pay_period'] . '.pdf',
             ['Attachment' => true]
         );
-
         exit; // stop further execution
     }
 
@@ -95,7 +94,7 @@ class AddPayrollRecords{
     public function deletepayroll($id){
         if($id){
             $this->addPayroll->deletePayrollData($id);
-            FlashMessage::addMessage('success', 'Payroll data deleted');
+            FlashMessage::addMessage('warning', 'Payroll data deleted');
             header('Location: payroll.php');
             exit;
 
