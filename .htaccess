@@ -1,0 +1,8 @@
+RewriteEngine On
+
+# If the requested file or folder exists, load it normally
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Otherwise, send everything to index.php
+RewriteRule ^ index.php [L]
