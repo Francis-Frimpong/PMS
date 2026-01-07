@@ -1,6 +1,6 @@
 <?php  
 $navLinks = [
-  "Dashboard" =>'dashboard.php', 
+  "Dashboard" =>'/PMS/dashboard', 
   "Employees" => "employees.php", 
   "Payroll" => "payroll.php", 
   "Reports" => "reports.php"

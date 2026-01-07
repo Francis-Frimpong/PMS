@@ -1,10 +1,14 @@
 <?php
 namespace App\Controllers;
 
+require_once __DIR__ . '/../Database/Database.php';
+require_once __DIR__ . '/../Models/Login.php';
+
 use App\Models\Login;
 use App\Database\Database;
 
-class LoginController{
+class LoginController
+{
     private $login;
 
     public function __construct()
@@ -13,24 +17,37 @@ class LoginController{
         $this->login = new Login($pdo);
     }
 
-    public function login($username, $password){
+    // GET /login
+    public function showLogin()
+    {
+        require 'app/Views/auth/login.php';
+    }
+
+
+    public function authenticate()
+    {
+
+        if($_SERVER['REQUEST_METHOD'] === 'POST'){
+            $username = trim($_POST['username']);
+            $password = $_POST['password'];
+
+            if(empty($username) || empty($password)){
+            header('Location: /PMS/login');
+            exit;
+        }
+
         $user = $this->login->login($username);
 
-        if(!$user){
-            header('Location:index.php');
+        if(!$user || !password_verify($password, $user['password'])){
+            header('Location: /PMS/login');
             exit;
         }
 
-        if(password_verify($password, $user['password'])){
-            $_SESSION['user_id'] = $user['id'];
-            $_SESSION['username'] = $user['username'];
+       
+        $_SESSION['user_id'] = $user['id'];
+        $_SESSION['username'] = $user['username'];
 
-            header('Location:dashboard.php');
-            exit;
-
-        }
-
-         header('Location:index.php');
-         exit;
-    }
+        header('Location: /PMS/dashboard');
+        exit;
+        }}
 }

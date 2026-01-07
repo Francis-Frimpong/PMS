@@ -1,56 +1,31 @@
 <?php
-  session_start();
-  require 'app/Database/Database.php';
-  require 'app/Models/Login.php';
-  require 'app/Controllers/LoginController.php';
+session_start();
 
-  use App\Controllers\LoginController;
+$routes = require 'app/Routes/routes.php';
 
-  $loginController = new LoginController();
+$method = $_SERVER['REQUEST_METHOD'];
+$uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+$basePath = '/PMS';
+if (strpos($uri, $basePath) === 0) {
+    $uri = substr($uri, strlen($basePath));
+}
+$uri = rtrim($uri, '/'); // normalize
+if ($uri === '') $uri = '/';
 
-  if($_SERVER['REQUEST_METHOD'] === 'POST'){
-    $username = trim($_POST['username']);
-    $password = $_POST['password'];
+$key = $method . ' ' . $uri;
 
-    if(empty($username) || empty($password)){
-      header('Location: index.php');
-      exit;
-    }
 
-    $loginController->login($username, $password);
-  }
-?>
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Payroll App - Login</title>
-    <link rel="stylesheet" href="css/style.css" />
-  </head>
-  <body>
-    <div class="container" style="max-width: 400px; margin-top: 50px">
-      <h2 style="text-align: center; margin-bottom: 20px">Login</h2>
-      <form action="index.php" method="POST">
-        <input type="text" placeholder="Username" name="username" required />
-        <input
-          type="password"
-          placeholder="Password"
-          name="password"
-          required
-        />
-        <button type="submit">Login</button>
-        <a
-          href="#"
-          style="
-            text-align: center;
-            display: block;
-            margin-top: 10px;
-            color: #4f46e5;
-          "
-          >Forgot Password?</a
-        >
-      </form>
-    </div>
-  </body>
-</html>
+if (!isset($routes[$key])) {
+    http_response_code(404);
+    echo "404 Not Found";
+    exit;
+}
+
+[$controllerName, $methodName] = $routes[$key];
+
+require "app/Controllers/$controllerName.php";
+
+$controllerClass = "App\\Controllers\\$controllerName";
+$controller = new $controllerClass();
+
+$controller->$methodName();
