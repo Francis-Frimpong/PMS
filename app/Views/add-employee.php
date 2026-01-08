@@ -1,18 +1,9 @@
-<?php
-require_once 'app/Middleware/Auth.php';
-
-use App\Middleware\Auth;
-Auth::check(); 
-
-$pageTitle = "Add Employee"
-
-?>
 <?php require_once __DIR__ . '/../partials/header.php'; ?>
 
 
     <div class="container main" style="max-width: 500px; margin-top: 30px">
       <h1>Add Employee</h1>
-      <form action="add-employee.php" method="POST" >
+      <form action="/PMS/add-employee" method="POST" >
         <input type="text" placeholder="Full Name" name="fullname" required />
         <input type="email" placeholder="Email" name="email" required />
         <input type="text" placeholder="phone" name="phone" required />

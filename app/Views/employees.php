@@ -12,7 +12,7 @@
 
     <div class="container main">
       <h1>Employees</h1>
-      <button class="btn" onclick="location.href='add-employee.php'">
+      <button class="btn" onclick="location.href='/PMS/add-employee'">
         Add New Employee
       </button>
 
