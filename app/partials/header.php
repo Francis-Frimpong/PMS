@@ -27,7 +27,7 @@ $navLinks = [
    
   </div>
 
-  <form action="logout.php" method="POST" class="logout-form">
+  <form action="/PMS/logout" method="POST" class="logout-form">
     <button type="submit" class="logout-btn">Logout</button>
   </form>
 </div>
