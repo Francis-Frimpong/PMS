@@ -39,7 +39,7 @@
                 <td>
                <a href="updateEmployee.php?id=<?php echo $list['id']?>" class="btn" style="background: #05b96eff">Edit</a>
 
-                  <a href="employee-detail.php?id=<?= $list['id'] ?>" class="btn" style="background: #efde44ff">
+                  <a href="/PMS/employee-detail?id=<?= $list['id'] ?>" class="btn" style="background: #efde44ff">
                     Details
                   </a>
                     <button class="btn deleteBtn" style="background-color: #d3381dff;"  data-id="<?= $list['id'] ?>">
