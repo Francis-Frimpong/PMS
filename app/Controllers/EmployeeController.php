@@ -5,20 +5,38 @@ namespace App\Controllers;
 require_once "app/Database/Database.php";
 require_once "app/Models/Employee.php";
 require_once "app/Core/Flash.php";
+require_once 'app/Middleware/Auth.php';
 
-use App\Models\Employee;
+use App\Middleware\Auth;
 use App\Core\FlashMessage;
-
+use App\Models\Employee;
 use App\Database\Database;
 
-class AddEmployee{
+class EmployeeController{
     private $addEmployee;
-
+    
     public function __construct()
     {
         $pdo = Database::getConnection();
         $this->addEmployee = new Employee($pdo);
     }
+    
+    public function employeePage(){
+         Auth::check(); 
+
+        $flashMessage = FlashMessage::getMessage();
+        $pageTitle = "Employee";
+
+        $data = $this->showEmployeeList();
+
+        $lists = $data['lists'];
+        $page = $data['page'];
+        $totalPages = $data['totalPages'];
+
+        require __DIR__ .'/../Views/employees.php';
+    }
+
+    
 
     public function newEmployee(){
         if($_SERVER["REQUEST_METHOD"] === 'POST'){
@@ -45,15 +63,23 @@ class AddEmployee{
     }
 
     public function showEmployeeList(){
-        return $this->addEmployee->displayEmployees();
+        $data = $this->addEmployee->displayEmployees();
+       
+        return [
+            'lists' => $data['list'],
+            'page' => $data['page'],
+            'totalPages' => $data['totalPages']
+        ];
     }
 
     public function delete($id){
-        if ($id) {
-            $this->addEmployee->deleteEmployee($id);
-            FlashMessage::addMessage('success', 'Employee info deleted');
-            header('Location: employees.php');
-            exit;
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id'])) {
+            if ($id) {
+                $this->addEmployee->deleteEmployee($id);
+                FlashMessage::addMessage('success', 'Employee info deleted');
+                header('Location: employees.php');
+                exit;
+            }
         }
     }
 
