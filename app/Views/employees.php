@@ -37,7 +37,7 @@
                 <td><?php echo htmlspecialchars( $list['role'])?></td>
                 <td>₵<?php echo htmlspecialchars($list['salary'])?></td>
                 <td>
-               <a href="updateEmployee.php?id=<?php echo $list['id']?>" class="btn" style="background: #05b96eff">Edit</a>
+               <a href="/PMS/updateEmployee?id=<?php echo $list['id']?>" class="btn" style="background: #05b96eff">Edit</a>
 
                   <a href="/PMS/employee-detail?id=<?= $list['id'] ?>" class="btn" style="background: #efde44ff">
                     Details
@@ -83,7 +83,7 @@
         <h3>Delete Employee?</h3>
           <p>Do you want to delete this employee?
         <div class="modal-actions">
-          <form action="employees.php" method="POST">
+          <form action="/PMS/employees?id=<?= $list['id'] ?>" method="POST">
             <input type="hidden" name="id" id="deleteId">
             <button type="submit" class="btn delete-btn">Delete</button>
           </form>

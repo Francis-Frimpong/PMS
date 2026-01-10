@@ -80,16 +80,28 @@ class EmployeeController{
         ];
     }
 
-    public function delete($id){
-        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id'])) {
-            if ($id) {
-                $this->addEmployee->deleteEmployee($id);
-                FlashMessage::addMessage('success', 'Employee info deleted');
-                header('Location: employees.php');
-                exit;
-            }
-        }
+   public function delete()
+{
+    Auth::check();
+
+    if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+        http_response_code(405);
+        exit;
     }
+
+    $id = $_GET['id'] ?? null;
+
+    if (!$id) {
+        die('Employee ID missing');
+    }
+
+    $this->addEmployee->deleteEmployee($id);
+
+    FlashMessage::addMessage('success', 'Employee info deleted');
+    header('Location: /PMS/employees');
+    exit;
+}
+
 
     
 }

@@ -4,13 +4,16 @@ namespace App\Controllers;
 require_once "app/Database/Database.php";
 require_once "app/Models/editUser.php";
 require_once "app/Core/Flash.php";
+require_once 'app/Middleware/Auth.php';
+
+use App\Middleware\Auth;
 
 
 use App\Models\EditUser;
 use App\Core\FlashMessage;
 use App\Database\Database;
 
-class EditUserData{
+class EditEmployeeController{
     private $editUserInfo;
 
     public function __construct()
@@ -20,8 +23,22 @@ class EditUserData{
 
     }
 
-    public function editAndUpdateUser()
-{
+    public function showUpdatePage(){
+        Auth::check();
+        $flashMessage = FlashMessage::getMessage();
+
+        $pageTitle = "Edit Employee";
+
+        $editData = $this->editAndUpdateEmployee();
+
+        $id = $editData['id'];
+        $employee = $editData['employee'];
+
+        require __DIR__.'/../Views/updateEmployee.php';
+    }
+
+    public function editAndUpdateEmployee()
+    {
     $id = $_GET['id'] ?? null;
 
     if (!$id) {
@@ -29,9 +46,9 @@ class EditUserData{
         exit;
     }
 
-    $user = $this->editUserInfo->selectUser($id);
+    $employee = $this->editUserInfo->selectUser($id);
 
-    if (!$user) {
+    if (!$employee) {
         die("User not found");
     }
 
@@ -55,13 +72,16 @@ class EditUserData{
             $id
         );
 
+        
+
         FlashMessage::addMessage('info', 'Employee Info updated');
-        header("Location: employees.php");
+        header("Location: /PMS/employees");
         exit;
+
     }
 
     return [
-        'user' => $user,
+        'employee' => $employee,
         'id' => $id
     ];
 }
