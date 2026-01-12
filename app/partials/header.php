@@ -6,7 +6,16 @@ $navLinks = [
   "Reports" => "reports.php"
 ];
 
-  $currentPage = basename($_SERVER['PHP_SELF']);
+  $currentUri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+
+  // strip base path
+  $basePath = '/PMS';
+  if (strpos($currentUri, $basePath) === 0) {
+      $currentUri = substr($currentUri, strlen($basePath));
+  }
+  if ($currentUri === '') {
+      $currentUri = '/';
+  }
 
 ?>
 
@@ -21,10 +30,15 @@ $navLinks = [
   <body>
 <div class="navbar">
   <div class="nav-links">
-    <?php foreach($navLinks as $navlink => $url) :?>
-      <a href="<?= htmlspecialchars($url)?>" class="<?=  $currentPage === $url? 'active-page': ''?>"><?= htmlspecialchars($navlink) ?></a>
-    <?php endforeach?>
-   
+    <?php foreach($navLinks as $label => $url): 
+        $linkPath = parse_url($url, PHP_URL_PATH);
+        $linkPath = str_replace($basePath, '', $linkPath);
+    ?>
+      <a href="<?= htmlspecialchars($url) ?>"
+         class="<?= $currentUri === $linkPath ? 'active-page' : '' ?>">
+         <?= htmlspecialchars($label) ?>
+      </a>
+    <?php endforeach ?>
   </div>
 
   <form action="/PMS/logout" method="POST" class="logout-form">
