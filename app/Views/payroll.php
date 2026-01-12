@@ -12,7 +12,7 @@
 
     <div class="container main">
       <h1>Payroll</h1>
-      <button class="btn" onclick="location.href='add-payroll.php'">
+      <button class="btn" onclick="location.href='/PMS/add-payroll'">
         Add Payroll Record
       </button>
 

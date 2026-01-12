@@ -3,34 +3,34 @@ namespace App\Controllers;
 
 require_once __DIR__ . '/../../vendor/autoload.php';
 
+require_once 'app/Middleware/Auth.php';
 require_once "app/Database/Database.php";
 require_once "app/Models/PayrollData.php";
+require_once "app/Models/Employee.php";
 require_once "app/Core/Flash.php";
-require_once 'app/Middleware/Auth.php';
+
 use App\Middleware\Auth;
-
-
-
-
-
-
 use App\Models\Payroll;
+use App\Models\Employee;
 use App\Core\FlashMessage;
 use App\Database\Database;
 use Dompdf\Dompdf;
 
 class PayrollRecordController{
     private $addPayroll;
+    private $employeeList;
 
     public function __construct()
     {
         $pdo = Database::getConnection();
         $this->addPayroll = new Payroll($pdo);
+        $this->employeeList = new Employee($pdo);
     }
 
     public function payrollPage(){
         Auth::check(); 
         $flashMessage = FlashMessage::getMessage();
+
 
         $pageTitle = "Payroll";
         $payrollData = $this->showPayrollList();
@@ -41,6 +41,19 @@ class PayrollRecordController{
 
 
         require __DIR__ .'/../Views/payroll.php';
+    }
+
+    public function addPayrollpage(){
+        Auth::check(); 
+
+        $employeeId = $this->employeeList->displayEmployees();
+
+        $lists = $employeeId['list'];
+
+        $pageTitle = "Add Payroll Records";
+        require __DIR__ .'/../Views/add-payroll.php';
+
+
     }
 
     public function newPayrollRecord(){
@@ -61,7 +74,7 @@ class PayrollRecordController{
             $this->addPayroll->addPayroll($employee_id, $pay_period, $gross_salary, $tax, $deductions, $net_salary, $payment_date);
 
             FlashMessage::addMessage('success', 'Payroll added');
-            header('Location: payroll.php');
+            header('Location: /PMS/payroll');
             exit;
         }
     }
@@ -130,16 +143,25 @@ class PayrollRecordController{
     }
 }
 
-// $payrollData = $displayPayroll->showPayrollList();
-// $payrollLists = $payrollData['list'];
 
 
-// $page = $payrollData['page'];
-// $totalPages = $payrollData['totalPages'];
 
-// // delete payroll data
-// if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id'])){
-//   $displayPayroll->deletepayroll($_POST['id']);
-// }
+// use App\Controllers\AddEmployee;
+// use App\Controllers\AddPayrollRecords;
+// use App\Core\FlashMessage;
 
-// $pageTitle = "Payroll";
+// use App\Middleware\Auth;
+
+// Auth::check(); 
+
+// $employeeList = new AddEmployee();
+// $addpayroll = new AddPayrollRecords;
+
+// $addpayroll->newPayrollRecord();
+
+// $data = $employeeList->showEmployeeList();
+// $lists = $data['list'];
+// // $page = $data['page'];
+// // $totalPages = $data['totalPages'];
+
+// $pageTitle = "Add Payroll Records"
