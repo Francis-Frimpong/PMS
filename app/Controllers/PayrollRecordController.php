@@ -6,19 +6,41 @@ require_once __DIR__ . '/../../vendor/autoload.php';
 require_once "app/Database/Database.php";
 require_once "app/Models/PayrollData.php";
 require_once "app/Core/Flash.php";
+require_once 'app/Middleware/Auth.php';
+use App\Middleware\Auth;
+
+
+
+
+
 
 use App\Models\Payroll;
 use App\Core\FlashMessage;
 use App\Database\Database;
 use Dompdf\Dompdf;
 
-class AddPayrollRecords{
+class PayrollRecordController{
     private $addPayroll;
 
     public function __construct()
     {
         $pdo = Database::getConnection();
         $this->addPayroll = new Payroll($pdo);
+    }
+
+    public function payrollPage(){
+        Auth::check(); 
+        $flashMessage = FlashMessage::getMessage();
+
+        $pageTitle = "Payroll";
+        $payrollData = $this->showPayrollList();
+
+        $payrollLists = $payrollData['list'];
+        $page = $payrollData['page'];
+        $totalPages = $payrollData['totalPages'];
+
+
+        require __DIR__ .'/../Views/payroll.php';
     }
 
     public function newPayrollRecord(){
@@ -45,7 +67,13 @@ class AddPayrollRecords{
     }
 
     public function showPayrollList(){
-        return $this->addPayroll->showPayroll();
+        $payrollData = $this->addPayroll->showPayroll();
+
+        return[
+            'list' => $payrollData['list'],
+            'page' => $payrollData['page'],
+            'totalPages' => $payrollData['totalPages'],
+        ];
     }
 
 
@@ -101,3 +129,17 @@ class AddPayrollRecords{
         }
     }
 }
+
+// $payrollData = $displayPayroll->showPayrollList();
+// $payrollLists = $payrollData['list'];
+
+
+// $page = $payrollData['page'];
+// $totalPages = $payrollData['totalPages'];
+
+// // delete payroll data
+// if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id'])){
+//   $displayPayroll->deletepayroll($_POST['id']);
+// }
+
+// $pageTitle = "Payroll";

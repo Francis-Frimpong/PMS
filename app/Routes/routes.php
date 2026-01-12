@@ -6,4 +6,5 @@ return array_merge(
     require __DIR__ .'/add-employeeRoutes.php',
     require __DIR__ .'/employeeDetailRoutes.php',
     require __DIR__ .'/employeeEditRoutes.php',
+    require __DIR__ .'/payrollRoutes.php',
 );
