@@ -132,14 +132,25 @@ class PayrollRecordController{
 
 
 
-    public function deletepayroll($id){
-        if($id){
-            $this->addPayroll->deletePayrollData($id);
-            FlashMessage::addMessage('warning', 'Payroll data deleted');
-            header('Location: payroll.php');
-            exit;
+    public function deletepayroll(){
+        Auth::check();
 
+        if($_SERVER['REQUEST_METHOD'] !== 'POST'){
+            http_response_code(405);
+            exit;
         }
+
+        $id = $_GET['id'] ?? null;
+
+        if(!$id){
+            die('Payroll ID missing');
+        }
+
+        $this->addPayroll->deletePayrollData($id);
+
+        FlashMessage::addMessage('warning', 'Payroll data deleted');
+        header('Location: /PMS/employees');
+        exit;
     }
 }
 

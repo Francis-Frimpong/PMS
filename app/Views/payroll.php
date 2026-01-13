@@ -80,9 +80,9 @@
        <div class="modal-overlay" id="modal">
       <div class="modal-box">
         <h3>Delete Employee?</h3>
-          <p>Do you want to delete this employee?
+          <p>Do you want to delete this payroll?
         <div class="modal-actions">
-          <form action="employees.php" method="POST">
+          <form action="/PMS/payroll?id=<?= $payroll['payroll_id']?>" method="POST">
             <input type="hidden" name="id" id="deleteId">
             <button type="submit" class="btn delete-btn">Delete</button>
           </form>
