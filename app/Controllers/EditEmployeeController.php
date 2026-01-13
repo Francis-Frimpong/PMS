@@ -42,7 +42,7 @@ class EditEmployeeController{
     $id = $_GET['id'] ?? null;
 
     if (!$id) {
-        header("Location: employees.php");
+        header("Location: /PMS/employees");
         exit;
     }
 

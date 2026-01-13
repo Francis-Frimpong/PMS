@@ -38,7 +38,7 @@
                 <td>₵<?php echo htmlspecialchars($payroll['net_salary'])?></td>
                 <td><?php echo htmlspecialchars($payroll['payment_date'])?></td>
                 <td>
-                  <a href="editPayroll.php?id=<?= $payroll['payroll_id'] ?>" class="btn" style="background: #10b981">Edit</a>
+                  <a href="/PMS/editPayroll?id=<?= $payroll['payroll_id'] ?>" class="btn" style="background: #10b981">Edit</a>
                   
                  <button class="btn deleteBtn" style="background-color: #d3381dff;"  data-id="<?= $payroll['payroll_id'] ?>">
                         Delete

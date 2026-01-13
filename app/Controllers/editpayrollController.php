@@ -4,28 +4,47 @@ namespace App\Controllers;
 require_once "app/Database/Database.php";
 require_once "app/Models/editpayrollRecords.php";
 require_once "app/Core/Flash.php";
+require_once 'app/Middleware/Auth.php';
+
 
 use App\Models\EditPayroll;
 use App\Core\FlashMessage;
 use App\Database\Database;
+use App\Middleware\Auth;
 
 
-class UpdatePayrollData{
+
+class EditPayrollController{
     private $editPayroll;
     
 
     public function __Construct()
     {
         $pdo = Database::getConnection();
+
+
         $this->editPayroll = new EditPayroll($pdo);
     }
 
-   public function UpdatePayrollRecords()
+    public function showPayrollEditPage(){
+        Auth::check(); 
+        $pageTitle = "Edit Payroll Records";
+
+        $data = $this->updatePayrollRecords();
+
+        $id = $data['id'];
+        $payroll   = $data['payroll'];
+        $employees = $data['employees']; 
+
+        require __DIR__ .'/../Views/editPayroll.php';
+    }
+
+   public function updatePayrollRecords()
 {
     $id = $_GET['id'] ?? null;
 
     if (!$id) {
-        header("Location: payroll.php");
+        header("Location: /PMS/payroll");
         exit;
     }
 
@@ -61,15 +80,26 @@ class UpdatePayrollData{
         );
 
         FlashMessage::addMessage('info', 'Employee payroll data updated');
-        header("Location: payroll.php");
+        header("Location: /PMS/payroll");
         exit;
     }
 
     // 4️⃣ Return clean data to view
     return [
+        'id' => $id,
         'payroll'   => $payroll,    // ONE record
         'employees' => $employees   // LIST
     ];
 }
 
 }
+
+
+// controller = new UpdatePayrollData();
+// $data = $controller->UpdatePayrollRecords();
+
+
+// $id = $_GET['id'];
+
+
+// $pageTitle = "Edit Payroll Records"

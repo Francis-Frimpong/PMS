@@ -1,34 +1,10 @@
-<?php
-require_once 'app/Middleware/Auth.php';
-require_once 'app/Controllers/editpayrollController.php';
 
-
-use App\Controllers\AddPayrollRecords;
-use App\Controllers\UpdatePayrollData;
-
-
-use App\Middleware\Auth;
-
-Auth::check(); 
-
-
-$controller = new UpdatePayrollData();
-$data = $controller->UpdatePayrollRecords();
-
-$payroll   = $data['payroll'];
-$employees = $data['employees']; 
-$id = $_GET['id'];
-
-
-$pageTitle = "Edit Payroll Records"
-
-?>
-<?php require_once __DIR__ . '/app/partials/header.php'; ?>
+<?php require_once __DIR__ . '/../partials/header.php'; ?>
 
 
     <div class="container main" style="max-width: 500px; margin-top: 30px">
       <h1>Edit Payroll Record</h1>
-  <form action="editPayroll.php?id=<?= $id ?>" method="POST">
+  <form action="/PMS/editPayroll?id=<?= $id ?>" method="POST">
    <select name="employee_id" required>
       <option value="">Select Employee</option>
 
@@ -66,5 +42,5 @@ $pageTitle = "Edit Payroll Records"
 </form>
 
     </div>
-<?php require_once __DIR__ . '/app/partials/footer.php'; ?>
+<?php require_once __DIR__ . '/../partials/footer.php'; ?>
  

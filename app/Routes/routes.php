@@ -8,4 +8,5 @@ return array_merge(
     require __DIR__ .'/employeeEditRoutes.php',
     require __DIR__ .'/payrollRoutes.php',
     require __DIR__ .'/add-payrollRoutes.php',
+    require __DIR__ .'/payrollEditRoutes.php',
 );
