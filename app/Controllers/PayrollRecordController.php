@@ -43,6 +43,23 @@ class PayrollRecordController{
         require __DIR__ .'/../Views/payroll.php';
     }
 
+
+    public function reportPage(){
+        Auth::check(); 
+        $pageTitle = "Reports";
+
+        $data = $this->employeeList->displayEmployees();
+
+        $lists = $data['list'];
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $this->downloadPayslip();
+        }
+
+
+        require __DIR__ .'/../Views/reports.php';
+    }
+
     public function addPayrollpage(){
         Auth::check(); 
 
@@ -67,7 +84,7 @@ class PayrollRecordController{
             $payment_date = trim($_POST['payment_date']);
 
             if(empty($employee_id) || empty($pay_period) || empty($gross_salary) || empty($tax) || empty($deductions) || empty($net_salary) || empty($payment_date) ){
-                header('Location: add-payroll.php');
+                header('Location: /PMS/add-payroll');
                 exit;        
             }
 
@@ -89,11 +106,32 @@ class PayrollRecordController{
         ];
     }
 
+    public function deletepayroll(){
+        Auth::check();
+
+        if($_SERVER['REQUEST_METHOD'] !== 'POST'){
+            http_response_code(405);
+            exit;
+        }
+
+        $id = $_GET['id'] ?? null;
+
+        if(!$id){
+            die('Payroll ID missing');
+        }
+
+        $this->addPayroll->deletePayrollData($id);
+
+        FlashMessage::addMessage('warning', 'Payroll data deleted');
+        header('Location: /PMS/employees');
+        exit;
+    }
+
 
    public function downloadPayslip()
     {
         if($_SERVER['REQUEST_METHOD'] !== 'POST'){
-            header('Location: payroll.php');
+            header('Location: /PMS/payroll');
             exit;
         }
 
@@ -130,28 +168,9 @@ class PayrollRecordController{
         exit; // stop further execution
     }
 
+    
 
 
-    public function deletepayroll(){
-        Auth::check();
-
-        if($_SERVER['REQUEST_METHOD'] !== 'POST'){
-            http_response_code(405);
-            exit;
-        }
-
-        $id = $_GET['id'] ?? null;
-
-        if(!$id){
-            die('Payroll ID missing');
-        }
-
-        $this->addPayroll->deletePayrollData($id);
-
-        FlashMessage::addMessage('warning', 'Payroll data deleted');
-        header('Location: /PMS/employees');
-        exit;
-    }
 }
 
 

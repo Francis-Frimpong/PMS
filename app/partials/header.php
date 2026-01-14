@@ -3,7 +3,7 @@ $navLinks = [
   "Dashboard" =>'/PMS/dashboard', 
   "Employees" => "/PMS/employees", 
   "Payroll" => "/PMS/payroll", 
-  "Reports" => "reports.php"
+  "Reports" => "/PMS/reports"
 ];
 
   $currentUri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
